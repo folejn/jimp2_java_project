@@ -23,19 +23,26 @@ public class Gener {
     public int getCols() {return c;}
 
     public int getValue(int x, int y) throws IllegalArgumentException{
-        if (x > matrixGen.length || y > matrixGen[0].length || x < 0 || y < 0)
+        if (x > r || y > c || x < 0 || y < 0)
             throw new IllegalArgumentException("Illegal coordinates");
         return matrixGen[x][y];
     }
     public void setValue(int x, int y, int value) throws IllegalArgumentException {
-        if (x > matrixGen.length || y > matrixGen[0].length || x < 0 || y < 0)
+        if (x > r || y > c || x < 0 || y < 0)
             throw new IllegalArgumentException("Illegal coordinates");
         matrixGen[x][y] = value;
+    }
+    public void printOnConsole() {
+        for(int i=0; i<r; i++) {
+            for(int j=0; j<c; j++)
+                System.out.print(getValue(i,j));
+            System.out.println("");
+        }
     }
 
     public void nextStep() {
         for(int i=0; i<r; i++) {
-            for (int j = 0; j < r; j++) {
+            for (int j = 0; j < c; j++) {
                 whatCellType(i, j);
             }
         }
@@ -63,9 +70,6 @@ public class Gener {
             }
         }
         scn.close();
-        for(int i = 0; i < r; i++)
-            for(int j = 0; j < c; j++)
-                System.out.println(matrixGen[i][j]);
     }
 
     private void readStructFromFile(File inFile) {
