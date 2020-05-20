@@ -12,6 +12,7 @@ public class GenerTest<e> {
         File in = new File("test/in.txt");
         try{
             Gener g = new Gener(in);
+            assertNotNull(g);
             for(int i=0; i<5; i++) {
                 g.printOnConsole();
                 g.nextStep();
