@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import static generation.CellProperties.*;
 
@@ -16,7 +17,7 @@ public class Gener {
 
     public Gener(File inFile) throws Exception {
         //matrixGen = new int[r][c]; //- musi się znaleźć w funkcjach czytających z pliku, tutaj tymczasowo
-        readFromFile(inFile);       // lub readFromFile, ale to implementujemy później
+        readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
         next = new int[r][c];
     }
     public int getRows() {return r;}
@@ -30,7 +31,7 @@ public class Gener {
     public void setValue(int x, int y, int value) throws IllegalArgumentException {
         if (x > r || y > c || x < 0 || y < 0)
             throw new IllegalArgumentException("Illegal coordinates");
-        matrixGen[x][y] = value;
+        matrixGen[y][x] = value;
     }
     public void printOnConsole() {
         for(int i=0; i<r; i++) {
@@ -70,14 +71,86 @@ public class Gener {
             }
         }
         scn.close();
+
+        Struct.fillTable(r, c, matrixGen);
     }
 
-    private void readStructFromFile(File inFile) {
-        /* pobiera dane w postaci opisanych struktur, przykład na isodzie (Diode(x,y) itp);
-        na początku funkcja podstawia wartości pod r i c, następnie wypełnia macierz
-         */
-        //matrixGen = new int[r][c];
-        //TODO
+    private void readStructFromFile(File inFile) throws Exception {
+        r = 0;
+        c = 0;
+        int [] xArr = new int[256];
+        int [] yArr = new int[256];
+        int k = 0;
+        Scanner Scanner = new Scanner(new BufferedReader(new FileReader(inFile)));
+        while (Scanner.hasNextLine()) {
+            String struct;
+            int x = 0, y = 0;
+            String xx, yy;
+            struct = Scanner.next().replaceAll(":", "");
+            xx = Scanner.next();
+            x = Integer.parseInt(xx.replaceAll(",", ""));
+            yy = Scanner.next();
+            y = Integer.parseInt(yy.replaceAll(",", ""));
+            if(struct.equals("Diode")) {
+                if(y + 2 < 12)
+                    y = 12;
+                else
+                    y += 2;
+                if(x + 3 < 12)
+                    x = 12;
+                else
+                    x += 3;
+                Scanner.next();
+            }
+            xArr[k] = x;
+            yArr[k] = y;
+            k++;
+        }
+        Scanner.close();
+
+        Arrays.sort(xArr);
+        Arrays.sort(yArr);
+        r = yArr[yArr.length - 1];
+        c = xArr[xArr.length - 1];
+
+        matrixGen = new int[r][c];
+
+        Scanner nScanner = new Scanner(new BufferedReader(new FileReader(inFile)));
+        while (nScanner.hasNextLine()) {
+            String struct;
+            int x = 0, y = 0;
+            String xx, yy;
+            String type;
+            struct = nScanner.next().replaceAll(":", "");
+            xx = nScanner.next();
+            x = Integer.parseInt(xx.replaceAll(",", ""));
+            yy = nScanner.next();
+            y = Integer.parseInt(yy.replaceAll(",", ""));
+            if(struct.equals("Diode")) {
+                type = nScanner.next();
+                if(type.equals("Normal"))
+                    Struct.drawNormalDiode(x, y, c, matrixGen);
+                else if(type.equals("Reversed"))
+                    Struct.drawReversedDiode(x, y, c, matrixGen);
+                continue;
+            }
+            switch(struct){
+                case "Empty":
+                    setValue(x, y, EMPTY);
+                    break;
+                case "ElectronHead":
+                    setValue(x, y, HEAD);
+                    break;
+                case "ElectronTail":
+                    setValue(x, y, TAIL);
+                    break;
+                case "Conductor":
+                    setValue(x, y, CONDUCTOR);
+            }
+        }
+        nScanner.close();
+
+        Struct.fillTable(r, c, matrixGen);
     }
 
     private void copyArrayValues() {
