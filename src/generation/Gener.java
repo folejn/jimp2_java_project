@@ -31,7 +31,7 @@ public class Gener {
     public void setValue(int x, int y, int value) throws IllegalArgumentException {
         if (x > r || y > c || x < 0 || y < 0)
             throw new IllegalArgumentException("Illegal coordinates");
-        matrixGen[y][x] = value;
+        matrixGen[x][y] = value;
     }
     public void printOnConsole() {
         for(int i=0; i<r; i++) {
@@ -136,16 +136,17 @@ public class Gener {
             }
             switch(struct){
                 case "Empty":
-                    setValue(x, y, EMPTY);
+                    matrixGen[y][x] = EMPTY;
                     break;
                 case "ElectronHead":
-                    setValue(x, y, HEAD);
+                    matrixGen[y][x] = HEAD;
                     break;
                 case "ElectronTail":
-                    setValue(x, y, TAIL);
+                    matrixGen[y][x] = TAIL;
                     break;
                 case "Conductor":
-                    setValue(x, y, CONDUCTOR);
+                    matrixGen[y][x] = CONDUCTOR;
+                    break;
             }
         }
         nScanner.close();
