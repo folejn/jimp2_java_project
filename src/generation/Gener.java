@@ -17,20 +17,21 @@ public class Gener {
 
     public Gener(File inFile) throws Exception {
         //matrixGen = new int[r][c]; //- musi się znaleźć w funkcjach czytających z pliku, tutaj tymczasowo
-        readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
+        //readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
+        readFromFile(inFile);
         next = new int[r][c];
     }
     public int getRows() {return r;}
     public int getCols() {return c;}
 
-    public int getValue(int x, int y) throws IllegalArgumentException{
+    public int getValue(int x, int y) throws NullPointerException{
         if (x > r || y > c || x < 0 || y < 0)
-            throw new IllegalArgumentException("Illegal coordinates");
+            throw new NullPointerException("Illegal coordinates");
         return matrixGen[x][y];
     }
-    public void setValue(int x, int y, int value) throws IllegalArgumentException {
+    public void setValue(int x, int y, int value) throws NullPointerException{
         if (x > r || y > c || x < 0 || y < 0)
-            throw new IllegalArgumentException("Illegal coordinates");
+            throw new NullPointerException("Illegal coordinates");
         matrixGen[x][y] = value;
     }
     public void printOnConsole() {

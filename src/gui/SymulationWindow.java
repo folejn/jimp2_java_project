@@ -2,42 +2,55 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-
+import generation.Gener;
 import static gui.Properties.*;
+import static java.awt.BorderLayout.EAST;
+import static java.awt.BorderLayout.WEST;
+
 
 public class SymulationWindow extends JFrame {
-    JPanel panel1;
-    JPanel panel2;
-    public SymulationWindow() {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT+40);
-        setResizable(true);
+    static JPanel full, panel1, panel2;
+    static Gener gen;
+    Properties p;
+    public SymulationWindow(Gener gen) {
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setResizable(false);
         setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.gen = gen;
+        p= new Properties(gen.getRows(),gen.getCols());
         paintComponent();
     }
 
     private void paintComponent() {
-        /*panel1 = new JPanel();
-        //panel1.setSize(WINDOW_WIDTH - INTER_PANEL_WIDTH,WINDOW_HEIGHT);
-        panel1.setLayout(new GridLayout(5,2));
-        panel1.add(new Button("test"));
-        panel1.add(new Button("test"));
-        add(panel1);
-        panel1.setVisible(true);*/
-
         panel1 = new SymPanel();
-        //getContentPane().add(panel1);
-        //pack();
-        add(panel1);
-
         panel2 = new InteractionPanel();
-        add(panel2);
-        // create a splitpane
-        JSplitPane sl = new JSplitPane(SwingConstants.VERTICAL, panel1, panel2);
-        sl.setEnabled(false);
-        sl.setDividerLocation(WINDOW_WIDTH-INTER_PANEL_WIDTH);
-        add(sl);
+
+        full = new JPanel(new BorderLayout());
+        full.add(panel1,WEST);
+        full.add(panel2,EAST);
+        full.setVisible(true);
+
+        JSplitPane pane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT,
+                panel1,  panel2);
+        pane.setEnabled(false);
+        pane.setDividerLocation(WINDOW_WIDTH-INTER_PANEL_WIDTH);
+        pane.setDividerSize(0);
+        full.add(pane);
+        add(full);
     }
+    static public void sym() {
+        int iter = 3;
+        Graphics g=panel1.getGraphics();
+        for(int i=0;i<iter;i++) {
+            gen.nextStep();
+            panel1.paint(g);
+
+        }
+
+    }
+
+
+
 }

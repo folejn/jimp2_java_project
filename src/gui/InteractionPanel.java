@@ -1,18 +1,31 @@
 package gui;
-
-import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
 import static gui.Properties.*;
 
-public class InteractionPanel extends JPanel{
-       public InteractionPanel() {
-           setPreferredSize(new Dimension(INTER_PANEL_WIDTH, INTER_PANEL_HEIGHT));
-        }
+public class InteractionPanel extends JPanel implements ActionListener {
+    private JButton start;
+    public InteractionPanel() {
+        setPreferredSize(new Dimension(INTER_PANEL_WIDTH,INTER_PANEL_HEIGHT));
+        //setLocation(100,100);
+        setVisible(true);
+        //setBackground(Color.CYAN);
+        setLayout(new FlowLayout());
+        start = new JButton("Start");
+        start.addActionListener(this);
+        add(start);
 
-        @Override
-        protected void paintComponent(Graphics g) {
-           super.paintComponent(g);
-
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if(source == start) {
+            SymulationWindow.sym();
         }
+    }
+
 }

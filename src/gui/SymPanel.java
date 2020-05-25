@@ -17,25 +17,31 @@ public class SymPanel extends JPanel {
         }
 
     }
-    private final int SCALE=CELL_SIZE;
     public SymPanel() {
         setPreferredSize(new Dimension(WINDOW_WIDTH-INTER_PANEL_WIDTH, WINDOW_HEIGHT));
         setVisible(true);
+
     }
-    @Override
-    protected void paintComponent(Graphics g) {
-        int[][] m = new int[CELL_N][CELL_N];
-        Random rand = new Random();
-        for(int i=0; i<m.length; i++)
-            for(int j=0; j<m[0].length; j++) {
+    public void paint(Graphics g) {
+        Gener gen =SymulationWindow.gen;
+        //Random rand = new Random();
+        //int m[][] = new int[cellRows][cellCols];
+        /*for(int i=0;i<cellRows;i++) {
+            for (int j=0;j<cellCols;j++) {
                 m[i][j] = rand.nextInt(4)+1;
             }
-        drawGener(m,g);
+        }*/
+        drawGener(gen,g);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        paint(g);
     }
     private void countCoordinates(int x, int y, Point p) {
         //return new Point(SCALE*x,SCALE*y);
-        p.x = SCALE*x;
-        p.y = SCALE*y;
+        p.x = CELL_WIDTH*x;
+        p.y = CELL_HEIGHT*y;
     }
 
     private void drawCell(int type, Point p, Graphics g) {
@@ -49,17 +55,19 @@ public class SymPanel extends JPanel {
                 throw new IllegalStateException("Unexpected value: " + type);
         }
         g.setColor(c);
-        g.fillRect(p.x,p.y,CELL_SIZE,CELL_SIZE);
+        g.fillRect(p.x,p.y,CELL_WIDTH,CELL_HEIGHT);
     }
-    public void drawGener(/*Gener gen*/int m[][],Graphics g) {
+    public void drawGener(Gener gen /*int m[][]*/,Graphics g) {
         Point p= new Point(0,0);
-        //int r=gen.getRows(), c=gen.getCols();
-        int r=m.length, c=m[0].length;
+        int r=gen.getRows(), c=gen.getCols();
+        //int r=cellRows;
+        //int c=cellCols;
 
         for(int i=0; i<r; i++) {
             for(int j=0; j<c; j++){
-                countCoordinates(i,j,p);
-                drawCell(/*gen.getValue(i,j)*/ m[i][j],p,g);
+                countCoordinates(j,i,p);
+                //System.out.println("x= "+p.x+"y="+p.y);
+                drawCell(gen.getValue(i,j) /*m[i][j]*/,p,g);
             }
         }
     }
