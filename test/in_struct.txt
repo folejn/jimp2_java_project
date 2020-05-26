@@ -1,0 +1,9 @@
+ElectronHead: 1, 1
+ElectronTail: 0, 1
+Conductor: 2, 1
+Conductor: 3, 1
+Conductor: 4, 1
+Conductor: 5, 1
+Conductor: 6, 1
+Conductor: 7, 1
+Empty: 0, 2

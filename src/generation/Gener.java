@@ -17,8 +17,8 @@ public class Gener {
 
     public Gener(File inFile) throws Exception {
         //matrixGen = new int[r][c]; //- musi się znaleźć w funkcjach czytających z pliku, tutaj tymczasowo
-        //readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
-        readFromFile(inFile);
+        readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
+        //readFromFile(inFile);
         next = new int[r][c];
     }
     public int getRows() {return r;}
@@ -114,7 +114,7 @@ public class Gener {
         r = yArr[yArr.length - 1];
         c = xArr[xArr.length - 1];
 
-        matrixGen = new int[r][c];
+        matrixGen = new int[++r][++c];
 
         Scanner nScanner = new Scanner(new BufferedReader(new FileReader(inFile)));
         while (nScanner.hasNextLine()) {
