@@ -11,13 +11,13 @@ public class GenerTest<e> {
     public void initTest() {
         File in = new File("test/in.txt");
         try{
-            Gener g = new Gener(in);
-            assertNotNull(g);
+            Gener gen = new Gener(in);
+            assertNotNull(gen);
             for(int i=0; i<5; i++) {
-                g.printOnConsole();
-                g.nextStep();
+                gen.printOnConsole();
+                gen.nextStep();
                 if(i==2) {
-                    assertEquals(TAIL,g.getValue(1,3));
+                    assertEquals(TAIL,gen.getValue(1,3));
                 }
             }
         } catch (Exception e){

@@ -12,18 +12,27 @@ public class Gener {
 
     private int[][] matrixGen;
     private final int[][] next;
+    private final int[][] zeroGen;
     private int r, c;   // wymiary macierzy będą pobierane z pliku przez readFromFile lub readStructFromFile
 
 
     public Gener(File inFile) throws Exception {
         //matrixGen = new int[r][c]; //- musi się znaleźć w funkcjach czytających z pliku, tutaj tymczasowo
-        readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
-        //readFromFile(inFile);
+        //readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
+        readFromFile(inFile);
         next = new int[r][c];
+        zeroGen = new int[r][c];
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++)
+                zeroGen[i][j] = matrixGen[i][j];
     }
     public int getRows() {return r;}
     public int getCols() {return c;}
-
+    public void backToStart() {
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++)
+                matrixGen[i][j] = zeroGen[i][j];
+    }
     public int getValue(int x, int y) throws NullPointerException{
         if (x > r || y > c || x < 0 || y < 0)
             throw new NullPointerException("Illegal coordinates");

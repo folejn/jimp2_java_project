@@ -19,6 +19,7 @@ public class SymPanel extends JPanel {
     }
     public SymPanel() {
         setPreferredSize(new Dimension(WINDOW_WIDTH-INTER_PANEL_WIDTH, WINDOW_HEIGHT));
+        setBackground(Color.BLACK);
         setVisible(true);
 
     }
