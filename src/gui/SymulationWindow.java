@@ -12,8 +12,9 @@ public class SymulationWindow extends JFrame {
     static JPanel full, panel1, panel2;
     static Gener gen;
     Properties p;
-    static public int steps;
-    static public int currentStep;
+    static int steps;
+    static int currentStep;
+    static int sleepTime;
     public SymulationWindow(Gener gen,int steps) {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(false);
@@ -23,6 +24,7 @@ public class SymulationWindow extends JFrame {
         this.gen = gen;
         this.steps = steps;
         this.currentStep=0;
+        this.sleepTime = 160;
         p= new Properties(gen.getRows(),gen.getCols());
         paintComponent();
     }
@@ -32,8 +34,8 @@ public class SymulationWindow extends JFrame {
         panel2 = new InteractionPanel();
 
         full = new JPanel(new BorderLayout());
-        full.add(panel1,WEST);
-        full.add(panel2,EAST);
+        full.add(panel1);
+        full.add(panel2);
         full.setVisible(true);
 
         JSplitPane pane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT,
@@ -41,6 +43,7 @@ public class SymulationWindow extends JFrame {
         pane.setEnabled(false);
         pane.setDividerLocation(WINDOW_WIDTH-INTER_PANEL_WIDTH);
         pane.setDividerSize(0);
+        pane.setBackground(Color.lightGray);
         full.add(pane);
         add(full);
     }
@@ -51,17 +54,15 @@ public class SymulationWindow extends JFrame {
             panel1.paint(g);
             ((InteractionPanel) panel2).changeText();
 
-            Thread.sleep(160);
+            Thread.sleep(sleepTime);
         }
 
     }
     static public void backToFirst() {
         gen.backToStart();
         currentStep=0;
-        System.out.println(gen.getValue(1,0));
-        //panel2.repaint();
         ((InteractionPanel) panel2).changeText();
-        panel1.repaint();
+        panel1.paint(panel1.getGraphics());
     }
 
 

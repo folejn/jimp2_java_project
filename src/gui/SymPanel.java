@@ -17,6 +17,7 @@ public class SymPanel extends JPanel {
         }
 
     }
+    Point v = new Point(center_x,center_y);
     public SymPanel() {
         setPreferredSize(new Dimension(WINDOW_WIDTH-INTER_PANEL_WIDTH, WINDOW_HEIGHT));
         setBackground(Color.BLACK);
@@ -56,7 +57,7 @@ public class SymPanel extends JPanel {
                 throw new IllegalStateException("Unexpected value: " + type);
         }
         g.setColor(c);
-        g.fillRect(p.x,p.y,CELL_WIDTH,CELL_HEIGHT);
+        g.fillRect(v.x+p.x,v.y+p.y,CELL_WIDTH,CELL_HEIGHT);
     }
     public void drawGener(Gener gen /*int m[][]*/,Graphics g) {
         Point p= new Point(0,0);
