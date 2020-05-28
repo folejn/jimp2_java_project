@@ -10,7 +10,7 @@ public class WireWorld {
     public static void main(String[] args) {
         int st = 0;
         gen = null;
-        File in = new File(args.length > 1 ? args[1] : "resources/in.txt");
+        File in = new File(args.length > 1 ? args[1] : "resources/inStruct.txt");
         int steps = args.length > 2 ? Integer.parseInt(args[2]) : 20;
 
         System.out.println(in);

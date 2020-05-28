@@ -18,8 +18,8 @@ public class Gener {
 
     public Gener(File inFile) throws Exception {
         //matrixGen = new int[r][c]; //- musi się znaleźć w funkcjach czytających z pliku, tutaj tymczasowo
-        //readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
-        readFromFile(inFile);
+        readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
+        //readFromFile(inFile);
         next = new int[r][c];
         zeroGen = new int[r][c];
         for(int i=0;i<r;i++)
