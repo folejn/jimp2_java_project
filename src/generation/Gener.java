@@ -17,9 +17,10 @@ public class Gener {
 
 
     public Gener(File inFile) throws Exception {
-        //matrixGen = new int[r][c]; //- musi się znaleźć w funkcjach czytających z pliku, tutaj tymczasowo
-        //readStructFromFile(inFile);       // lub readFromFile, ale to implementujemy później
-        readFromFile(inFile);
+        if(whatTypeOfData(inFile))
+            readFromFile(inFile);
+        else
+            readStructFromFile(inFile);
         next = new int[r][c];
         zeroGen = new int[r][c];
         for(int i=0;i<r;i++)
@@ -58,6 +59,15 @@ public class Gener {
             }
         }
         copyArrayValues();
+    }
+
+    private boolean whatTypeOfData(File inFile) throws Exception {
+            Scanner sc = new Scanner(new BufferedReader(new FileReader(inFile)));
+            String tmp = sc.next();
+            if(Character.isDigit(tmp.charAt(0)))
+                return true;
+            else
+                return false;
     }
 
     private void readFromFile(File inFile) throws Exception{
