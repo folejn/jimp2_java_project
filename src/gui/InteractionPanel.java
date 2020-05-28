@@ -11,8 +11,8 @@ import static gui.Properties.*;
 
 public class InteractionPanel extends JPanel implements ActionListener, AdjustmentListener {
     private JButton start, first;
-    private TextField genNr, speedText;
-    private JScrollBar speed;
+    private TextField genNr, speedText, stepsN;
+    private JScrollBar speed, steps;
     public InteractionPanel() {
         setPreferredSize(new Dimension(INTER_PANEL_WIDTH,INTER_PANEL_HEIGHT));
         //setLocation(100,100);
@@ -48,8 +48,20 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         speedText.setBounds(0,175,INTER_PANEL_WIDTH-30,30);
         speedText.setEditable(false);
         speedText.setSize(INTER_PANEL_WIDTH,20);
-        speedText.setText(Integer.toString(SymulationWindow.sleepTime)+"ms");
+        speedText.setText(SymulationWindow.sleepTime+"ms");
         add(speedText);
+
+        steps = new JScrollBar(0,5,5,1,20);
+        steps.setBounds(0,220,INTER_PANEL_WIDTH-20,20);
+        steps.addAdjustmentListener(this);
+        add(steps);
+
+        stepsN = new TextField();
+        stepsN.setBounds(0,245,INTER_PANEL_WIDTH-30,30);
+        stepsN.setEditable(false);
+        stepsN.setSize(INTER_PANEL_WIDTH,20);
+        stepsN.setText("ile gener:"+SymulationWindow.steps);
+        add(stepsN);
 
     }
     public void changeText() {
@@ -77,7 +89,12 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         if(source == speed) {
             final int a = 50;
             SymulationWindow.sleepTime = a * speed.getValue();
-            speedText.setText(Integer.toString(SymulationWindow.sleepTime)+"ms");
+            speedText.setText(SymulationWindow.sleepTime+"ms");
+        }
+        if(source == steps) {
+            SymulationWindow.steps = steps.getValue();
+            SymulationWindow.currentStep=0;
+            stepsN.setText("ile gener:"+SymulationWindow.steps);
         }
     }
 
