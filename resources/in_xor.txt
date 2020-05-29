@@ -1,0 +1,8 @@
+XOR: 5, 5, Normal
+ElectronHead: 1, 2
+ElectronTail: 0, 2
+ElectronHead: 1, 8
+ElectronTail: 0, 8
+XOR: 5, 13, Reversed
+ElectronHead: 12, 10
+ElectronTail: 13, 10

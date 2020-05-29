@@ -1,0 +1,8 @@
+OR: 3, 3, Normal
+OR: 5, 9, Reversed
+ElectronHead: 1, 1
+ElectronHead: 1, 5
+ElectronTail: 0, 1
+ElectronTail: 0, 5
+ElectronHead: 11, 7
+ElectronTail: 12, 7

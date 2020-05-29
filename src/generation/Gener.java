@@ -121,6 +121,35 @@ public class Gener {
                 else
                     x += 3;
                 Scanner.next();
+            } else if(struct.equals("OR")){
+                if(y + 4 < 7)
+                    y = 7;
+                else
+                    y += 4;
+                if(x + 4 < 12)
+                    x = 12;
+                else
+                    x += 4;
+                Scanner.next();
+            } else if(struct.equals("XOR")){
+                if(y + 6 < 9)
+                    y = 9;
+                else
+                    y += 6;
+                if(x + 5 < 12)
+                    x = 12;
+                else
+                    x += 5;
+                Scanner.next();
+            } else if(struct.equals("AND")){
+                if(y < 4)
+                    y = 4;
+                else
+                    y += 4;
+                if(x < 8)
+                    x = 8;
+                else
+                    x += 8;
             }
             xArr[k] = x;
             yArr[k] = y;
@@ -152,6 +181,26 @@ public class Gener {
                     Struct.drawNormalDiode(x, y, c, matrixGen);
                 else if(type.equals("Reversed"))
                     Struct.drawReversedDiode(x, y, c, matrixGen);
+                continue;
+            }
+            if(struct.equals("OR")) {
+                type = nScanner.next();
+                if(type.equals("Normal"))
+                    Struct.drawNormalOR(x, y, c, matrixGen);
+                else if(type.equals("Reversed"))
+                    Struct.drawReversedOR(x, y, c, matrixGen);
+                continue;
+            }
+            if(struct.equals("XOR")) {
+                type = nScanner.next();
+                if(type.equals("Normal"))
+                    Struct.drawNormalXOR(x, y, c, matrixGen);
+                else if(type.equals("Reversed"))
+                    Struct.drawReversedXOR(x, y, c, matrixGen);
+                continue;
+            }
+            if(struct.equals("AND")) {
+                Struct.drawAND(x, y, c, matrixGen);
                 continue;
             }
             switch(struct){
