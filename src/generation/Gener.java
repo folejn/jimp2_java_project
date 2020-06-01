@@ -1,8 +1,6 @@
 package generation;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import java.io.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -157,6 +155,24 @@ public class Gener {
         nScanner.close();
 
         Struct.fillTable(r, c, matrixGen);
+    }
+
+    public void writeToFile(File outFile){
+        try {
+            FileWriter f = new FileWriter(outFile);
+            PrintWriter writer = new PrintWriter(f);
+            for(int i = 0; i < r; i++){
+                for(int j = 0; j < c; j++){
+                    writer.print(matrixGen[i][j] + " ");
+                }
+                writer.println();
+            }
+            writer.close();
+        } catch(Exception e) {
+            System.err.println("Błąd przy zapisywaniu");
+            System.err.println(e);
+            System.exit(1);
+        }
     }
 
     private void copyArrayValues() {
