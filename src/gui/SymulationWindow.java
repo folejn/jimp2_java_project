@@ -2,10 +2,10 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+
 import generation.Gener;
 import static gui.Properties.*;
-import static java.awt.BorderLayout.EAST;
-import static java.awt.BorderLayout.WEST;
 
 
 public class SymulationWindow extends JFrame {
@@ -15,7 +15,8 @@ public class SymulationWindow extends JFrame {
     static int steps;
     static int currentStep;
     static int sleepTime;
-    public SymulationWindow(Gener gen,int steps) {
+    static File outFile;
+    public SymulationWindow(Gener gen,int steps, File outFile) {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(false);
         setVisible(true);
@@ -25,6 +26,7 @@ public class SymulationWindow extends JFrame {
         this.steps = steps;
         this.currentStep=0;
         this.sleepTime = 160;
+        this.outFile = outFile;
         p= new Properties(gen.getRows(),gen.getCols());
         paintComponent();
     }
@@ -53,9 +55,16 @@ public class SymulationWindow extends JFrame {
             gen.nextStep();
             panel1.paint(g);
             ((InteractionPanel) panel2).changeText();
-
             Thread.sleep(sleepTime);
+
+            for(int i=0;i<WireWorld.outf.length;i++)
+                if(Integer.parseInt(WireWorld.outf[i])==currentStep) {
+                    File outf = new File("out"+currentStep+".txt");
+                    System.out.println(outf);
+                    gen.writeToFile(outf);
+                }
         }
+        gen.writeToFile(outFile);
 
     }
     static public void backToFirst() {

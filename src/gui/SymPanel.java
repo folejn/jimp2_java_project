@@ -19,13 +19,6 @@ public class SymPanel extends JPanel {
     }
     public void paint(Graphics g) {
         Gener gen =SymulationWindow.gen;
-        //Random rand = new Random();
-        //int m[][] = new int[cellRows][cellCols];
-        /*for(int i=0;i<cellRows;i++) {
-            for (int j=0;j<cellCols;j++) {
-                m[i][j] = rand.nextInt(4)+1;
-            }
-        }*/
         drawGener(gen,g);
     }
 

@@ -115,7 +115,7 @@ public class Struct {
     }
 
     public static void drawReversedOR(int x, int y, int c, int[][] matrixGen){
-        int rOR[][] = {{EMPTY, CONDUCTOR, EMPTY},
+        int[][] rOR = {{EMPTY, CONDUCTOR, EMPTY},
                 {CONDUCTOR, CONDUCTOR, CONDUCTOR},
                 {EMPTY, CONDUCTOR, EMPTY}};
 
@@ -287,7 +287,6 @@ public class Struct {
         return new Dim(yArr[yArr.length - 1],xArr[xArr.length - 1]);
     }
     public static int replaceInStr(String line,String regex, String replacement) {
-        int xy = Integer.parseInt(line.replaceAll(regex, replacement));
-        return xy;
+        return Integer.parseInt(line.replaceAll(regex, replacement));
     }
 }
