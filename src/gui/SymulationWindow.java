@@ -51,18 +51,20 @@ public class SymulationWindow extends JFrame {
     }
     static public void sym() throws InterruptedException{
         Graphics g=panel1.getGraphics();
+        System.out.println(steps);
         while(steps>currentStep++) {
             gen.nextStep();
             panel1.paint(g);
             ((InteractionPanel) panel2).changeText();
             Thread.sleep(sleepTime);
 
-            for(int i=0;i<WireWorld.outf.length;i++)
-                if(Integer.parseInt(WireWorld.outf[i])==currentStep) {
-                    File outf = new File("out"+currentStep+".txt");
-                    System.out.println(outf);
-                    gen.writeToFile(outf);
-                }
+            if(WireWorld.outf != null)
+                for(int i=0;i<WireWorld.outf.length;i++)
+                    if(Integer.parseInt(WireWorld.outf[i])==currentStep) {
+                        File outf = new File("resources/out"+currentStep+".txt");
+                        System.out.println(outf);
+                        gen.writeToFile(outf);
+                    }
         }
         gen.writeToFile(outFile);
 
