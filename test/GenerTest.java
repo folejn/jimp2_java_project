@@ -1,3 +1,4 @@
+import generation.CellCompute;
 import generation.Gener;
 import static generation.CellProperties.*;
 import static org.junit.Assert.*;
@@ -6,7 +7,6 @@ import org.junit.Test;
 import java.io.File;
 
 public class GenerTest<e> {
-
     @Test
     public void initTest() {
         File in = new File("test/in.txt");

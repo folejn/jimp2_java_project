@@ -9,14 +9,7 @@ import java.util.Random;
 import static gui.Properties.*;
 import static generation.CellProperties.*;
 public class SymPanel extends JPanel {
-    private class Point {
-        int x, y;
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
 
-    }
     Point v = new Point(center_x,center_y);
     public SymPanel() {
         setPreferredSize(new Dimension(WINDOW_WIDTH-INTER_PANEL_WIDTH, WINDOW_HEIGHT));

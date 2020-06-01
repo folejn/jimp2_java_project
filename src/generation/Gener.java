@@ -51,14 +51,17 @@ public class Gener {
             System.out.println("");
         }
     }
-
     public void nextStep() {
+        long start = System.nanoTime();
+        long dif;
         for(int i=0; i<r; i++) {
             for (int j = 0; j < c; j++) {
                 whatCellType(i, j);
             }
         }
         copyArrayValues();
+        dif = System.nanoTime() - start;
+        System.out.println("time:"+dif);
     }
 
     private boolean whatTypeOfData(File inFile) throws Exception {
@@ -96,85 +99,18 @@ public class Gener {
     }
 
     private void readStructFromFile(File inFile) throws Exception {
-        r = 0;
-        c = 0;
-        int [] xArr = new int[256];
-        int [] yArr = new int[256];
-        int k = 0;
-        Scanner Scanner = new Scanner(new BufferedReader(new FileReader(inFile)));
-        while (Scanner.hasNextLine()) {
-            String struct;
-            int x = 0, y = 0;
-            String xx, yy;
-            struct = Scanner.next().replaceAll(":", "");
-            xx = Scanner.next();
-            x = Integer.parseInt(xx.replaceAll(",", ""));
-            yy = Scanner.next();
-            y = Integer.parseInt(yy.replaceAll(",", ""));
-            if(struct.equals("Diode")) {
-                if(y + 2 < 12)
-                    y = 12;
-                else
-                    y += 2;
-                if(x + 3 < 12)
-                    x = 12;
-                else
-                    x += 3;
-                Scanner.next();
-            } else if(struct.equals("OR")){
-                if(y + 4 < 7)
-                    y = 7;
-                else
-                    y += 4;
-                if(x + 4 < 12)
-                    x = 12;
-                else
-                    x += 4;
-                Scanner.next();
-            } else if(struct.equals("XOR")){
-                if(y + 6 < 9)
-                    y = 9;
-                else
-                    y += 6;
-                if(x + 5 < 12)
-                    x = 12;
-                else
-                    x += 5;
-                Scanner.next();
-            } else if(struct.equals("AND")){
-                if(y < 4)
-                    y = 4;
-                else
-                    y += 4;
-                if(x < 8)
-                    x = 8;
-                else
-                    x += 8;
-            }
-            xArr[k] = x;
-            yArr[k] = y;
-            k++;
-        }
-        Scanner.close();
-
-        Arrays.sort(xArr);
-        Arrays.sort(yArr);
-        r = yArr[yArr.length - 1];
-        c = xArr[xArr.length - 1];
-
+        Dim dim = Struct.structFileLines(inFile);
+        r = dim.r;
+        c = dim.c;
         matrixGen = new int[++r][++c];
 
         Scanner nScanner = new Scanner(new BufferedReader(new FileReader(inFile)));
         while (nScanner.hasNextLine()) {
             String struct;
-            int x = 0, y = 0;
-            String xx, yy;
             String type;
             struct = nScanner.next().replaceAll(":", "");
-            xx = nScanner.next();
-            x = Integer.parseInt(xx.replaceAll(",", ""));
-            yy = nScanner.next();
-            y = Integer.parseInt(yy.replaceAll(",", ""));
+            int x = Struct.replaceInStr(nScanner.next(),",","");
+            int y = Struct.replaceInStr(nScanner.next(),",","");
             if(struct.equals("Diode")) {
                 type = nScanner.next();
                 if(type.equals("Normal"))
@@ -246,7 +182,7 @@ public class Gener {
             return true;
         return false;
     }
-    private void whatCellType(int x, int y) {
+    void whatCellType(int x, int y) {
 
         int neighHeads = 0;
 

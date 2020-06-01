@@ -1,18 +1,18 @@
-Diode: 1, 4, Normal
-Diode: 1, 8, Reversed
-Diode: 1, 15, Normal
+Diode: 1, 40, Normal
+Diode: 1, 80, Reversed
+Diode: 1, 150, Normal
 Diode: 2, 30, Normal
 Diode: 20, 45, Reversed
 Diode: 30, 55, Normal
-ElectronHead: 1, 8
-ElectronHead: 1, 4
-ElectronHead: 1, 15
+ElectronHead: 1, 80
+ElectronHead: 1, 40
+ElectronHead: 1, 150
 ElectronHead: 2, 30
 ElectronHead: 20, 45
 ElectronHead: 30, 55
-ElectronTail: 0, 4
-ElectronTail: 0, 8
-ElectronTail: 0, 15
+ElectronTail: 0, 40
+ElectronTail: 0, 80
+ElectronTail: 0, 150
 ElectronTail: 1, 30
 ElectronTail: 19, 45
 ElectronTail: 29, 55

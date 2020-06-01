@@ -1,9 +1,15 @@
 package generation;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Arrays;
+import java.util.Scanner;
+
 import static generation.CellProperties.*;
 
 public class Struct {
-
     public static void drawNormalDiode(int x, int y, int c, int[][] matrixGen){
         int[][] nDiode = {{EMPTY,CONDUCTOR,EMPTY},
                         {CONDUCTOR,CONDUCTOR,CONDUCTOR},
@@ -219,5 +225,69 @@ public class Struct {
             for(int j = 0; j < c; j++)
                 if(matrixGen[i][j] == 0)
                     matrixGen[i][j] = EMPTY;
+    }
+    public static Dim structFileLines(File inFile) throws FileNotFoundException {
+        int [] xArr = new int[256];
+        int [] yArr = new int[256];
+        int k = 0;
+        Scanner scanner = new Scanner(new BufferedReader(new FileReader(inFile)));
+        while (scanner.hasNextLine()) {
+            String struct;
+            struct = scanner.next().replaceAll(":", "");
+            int x = replaceInStr(scanner.next(),",","");
+            int y = replaceInStr(scanner.next(),",","");
+            if(struct.equals("Diode")) {
+                if(y + 2 < 12)
+                    y = 12;
+                else
+                    y += 2;
+                if(x + 3 < 12)
+                    x = 12;
+                else
+                    x += 3;
+                scanner.next();
+            } else if(struct.equals("OR")){
+                if(y + 4 < 7)
+                    y = 7;
+                else
+                    y += 4;
+                if(x + 4 < 12)
+                    x = 12;
+                else
+                    x += 4;
+                scanner.next();
+            } else if(struct.equals("XOR")){
+                if(y + 6 < 9)
+                    y = 9;
+                else
+                    y += 6;
+                if(x + 5 < 12)
+                    x = 12;
+                else
+                    x += 5;
+                scanner.next();
+            } else if(struct.equals("AND")){
+                if(y < 4)
+                    y = 4;
+                else
+                    y += 4;
+                if(x < 8)
+                    x = 8;
+                else
+                    x += 8;
+            }
+            xArr[k] = x;
+            yArr[k] = y;
+            k++;
+        }
+        scanner.close();
+
+        Arrays.sort(xArr);
+        Arrays.sort(yArr);
+        return new Dim(yArr[yArr.length - 1],xArr[xArr.length - 1]);
+    }
+    public static int replaceInStr(String line,String regex, String replacement) {
+        int xy = Integer.parseInt(line.replaceAll(regex, replacement));
+        return xy;
     }
 }

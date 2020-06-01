@@ -21,7 +21,7 @@ public class Properties {
         }else{
             this.CELL_HEIGHT= WINDOW_HEIGHT/cellRows;
             this.CELL_WIDTH = this.CELL_HEIGHT;
-            center_x = (WINDOW_WIDTH - INTER_PANEL_WIDTH - CELL_HEIGHT*cellRows)/2;
+            center_x = (WINDOW_WIDTH - INTER_PANEL_WIDTH - CELL_HEIGHT*cellCols)/2;
         }
     }
 

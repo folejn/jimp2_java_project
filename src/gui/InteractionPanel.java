@@ -51,7 +51,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         speedText.setText(SymulationWindow.sleepTime+"ms");
         add(speedText);
 
-        steps = new JScrollBar(0,5,5,1,20);
+        steps = new JScrollBar(0,5,5,1,25);
         steps.setBounds(0,220,INTER_PANEL_WIDTH-20,20);
         steps.addAdjustmentListener(this);
         add(steps);
