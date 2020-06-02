@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
     private JButton start, first;
     private TextField genNr, speedText, stepsN;
     private JScrollBar speed, steps;
+    private SymulationWindow window;
     public InteractionPanel() {
         setPreferredSize(new Dimension(INTER_PANEL_WIDTH,INTER_PANEL_HEIGHT));
         //setLocation(100,100);
@@ -60,7 +62,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         stepsN.setBounds(0,245,INTER_PANEL_WIDTH-30,30);
         stepsN.setEditable(false);
         stepsN.setSize(INTER_PANEL_WIDTH,20);
-        stepsN.setText("ile gener:"+SymulationWindow.steps);
+        stepsN.setText("which gener:"+SymulationWindow.steps);
         add(stepsN);
 
     }
@@ -97,5 +99,6 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
             stepsN.setText("ile gener:"+SymulationWindow.steps);
         }
     }
+
 
 }

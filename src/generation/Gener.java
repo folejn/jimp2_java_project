@@ -53,16 +53,12 @@ public class Gener {
         }
     }
     public void nextStep() {
-        //long start = System.nanoTime();
-        //long dif;
         for(int i=0; i<r; i++) {
             for (int j = 0; j < c; j++) {
                 whatCellType(i, j);
             }
         }
         copyArrayValues();
-        //dif = System.nanoTime() - start;
-        //System.out.println("time:"+dif);
     }
 
     private boolean whatTypeOfData(File inFile) throws Exception {

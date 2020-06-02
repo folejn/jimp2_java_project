@@ -4,7 +4,6 @@ import generation.Gener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 import static gui.Properties.*;
 import static generation.CellProperties.*;
@@ -45,17 +44,13 @@ public class SymPanel extends JPanel {
         g.setColor(c);
         g.fillRect(v.x+p.x,v.y+p.y,CELL_WIDTH,CELL_HEIGHT);
     }
-    public void drawGener(Gener gen /*int m[][]*/,Graphics g) {
+    public void drawGener(Gener gen,Graphics g) {
         Point p= new Point(0,0);
         int r=gen.getRows(), c=gen.getCols();
-        //int r=cellRows;
-        //int c=cellCols;
-
         for(int i=0; i<r; i++) {
             for(int j=0; j<c; j++){
                 countCoordinates(j,i,p);
-                //System.out.println("x= "+p.x+"y="+p.y);
-                drawCell(gen.getValue(i,j) /*m[i][j]*/,p,g);
+                drawCell(gen.getValue(i,j),p,g);
             }
         }
     }

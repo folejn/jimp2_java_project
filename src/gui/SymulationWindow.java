@@ -75,6 +75,4 @@ public class SymulationWindow extends JFrame {
         ((InteractionPanel) panel2).changeText();
         panel1.paint(panel1.getGraphics());
     }
-
-
 }
