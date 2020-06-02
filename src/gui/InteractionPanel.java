@@ -11,10 +11,9 @@ import javax.swing.*;
 import static gui.Properties.*;
 
 public class InteractionPanel extends JPanel implements ActionListener, AdjustmentListener {
-    private JButton start, first;
-    private TextField genNr, speedText, stepsN;
-    private JScrollBar speed, steps;
-    private SymulationWindow window;
+    final private JButton start, first;
+    final private TextField genNr, speedText, stepsN;
+    final private JScrollBar speed, steps;
     public InteractionPanel() {
         setPreferredSize(new Dimension(INTER_PANEL_WIDTH,INTER_PANEL_HEIGHT));
         //setLocation(100,100);
@@ -41,7 +40,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         genNr.setSize(INTER_PANEL_WIDTH,20);
         add(genNr);
 
-        speed = new JScrollBar(0,5,5,1,10);
+        speed = new JScrollBar(Adjustable.HORIZONTAL,5,5,1,10);
         speed.setBounds(0,150,INTER_PANEL_WIDTH-20,20);
         speed.addAdjustmentListener(this);
         add(speed);
@@ -53,7 +52,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         speedText.setText(SymulationWindow.sleepTime+"ms");
         add(speedText);
 
-        steps = new JScrollBar(0,5,5,1,25);
+        steps = new JScrollBar(Adjustable.HORIZONTAL,5,5,1,25);
         steps.setBounds(0,220,INTER_PANEL_WIDTH-20,20);
         steps.addAdjustmentListener(this);
         add(steps);

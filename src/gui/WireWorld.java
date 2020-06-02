@@ -9,31 +9,30 @@ public class WireWorld {
     static Gener gen;
     public static String[]outf = null;
     public static void main(String[] args) {
-        int st = 0;
         gen = null;
-        File in = new File(args.length > 1 ? args[0] : "resources/inStruct.txt");
-        int steps = 0;
+        File in = new File(args.length > 0 ? args[0] : "resources/inStruct.txt");
+        int steps;
         try {
-            steps = args.length > 2 ? Integer.parseInt(args[1]) : 20;
+            steps = args.length > 1 ? Integer.parseInt(args[1]) : 20;
         } catch(Exception e) {
             steps = 20;
         }
-        File out = new File(args.length >3 ? args[2] : "resources/out.txt");
-        if(args.length > 4) {
+        File out = new File(args.length >2 ? args[2] : "resources/out.txt");
+        if(args.length > 3) {
             outf = new String[args.length-3];
-            System.arraycopy(args,4,outf,0,outf.length);
+            System.arraycopy(args,3,outf,0,outf.length);
             System.out.println(outf[0]);
         }
         if(out == null) {
             System.err.println(new NullPointerException());
-            System.err.println("Nie można znaleźć pliku wyjściowego");
+            System.err.println("Cannot find input file");
             System.exit(3);
         }
         System.out.println(in);
         try {
             gen = new Gener(in);
         } catch (Exception e){
-            System.err.println("Nie można otworzyć pliku wejściowego");
+            System.err.println("Cannot open input file");
             System.err.println(e);
             System.exit(1);
         }

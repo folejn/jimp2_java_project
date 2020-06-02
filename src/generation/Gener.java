@@ -184,7 +184,7 @@ public class Gener {
         try{
             next[x][y]=v;
         } catch (NullPointerException e){
-            System.err.println("Błąd kopiowania do tablicy: zły adres");
+            System.err.println("Pointer to null exc");
             System.exit(1);
         }
     }
