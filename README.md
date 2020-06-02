@@ -8,3 +8,5 @@ inFile.txt- plik wejściowy, jest argumentem zerowym;
 N - zadana liczba generacji;
 outFile.txt - plik wyjściowy dla generacji końcowej;
 a1 ... an - numery generacji zapisywane do pliku;
+
+Główna klasa: Wireworld;
