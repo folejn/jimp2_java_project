@@ -11,19 +11,17 @@ import javax.swing.*;
 import static gui.Properties.*;
 
 public class InteractionPanel extends JPanel implements ActionListener, AdjustmentListener {
-    final private JButton start, first;
-    final private TextField genNr, speedText, stepsN;
-    final private JScrollBar speed, steps;
+    private JButton start, first;
+    private TextField genNr, speedText, stepsN;
+    private JScrollBar speed, steps;
     public InteractionPanel() {
         setPreferredSize(new Dimension(INTER_PANEL_WIDTH,INTER_PANEL_HEIGHT));
-        //setLocation(100,100);
         setVisible(true);
-        //setBackground(new Color(160,190,180));
         setBackground(new Color(200,255,230));
-        //setLayout(new FlowLayout());
-        //setLayout(new GridLayout(,1));
         setLayout(null);
-
+        initComponents();
+    }
+    private void initComponents() {
         start = new JButton("Start");
         start.setBounds(10,0,INTER_PANEL_WIDTH-30,30);
         start.addActionListener(this);
@@ -40,7 +38,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         genNr.setSize(INTER_PANEL_WIDTH,20);
         add(genNr);
 
-        speed = new JScrollBar(Adjustable.HORIZONTAL,5,5,1,10);
+        speed = new JScrollBar(Adjustable.HORIZONTAL,2,6,1,10);
         speed.setBounds(0,150,INTER_PANEL_WIDTH-20,20);
         speed.addAdjustmentListener(this);
         add(speed);
@@ -63,7 +61,6 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         stepsN.setSize(INTER_PANEL_WIDTH,20);
         stepsN.setText("how many gener:"+SymulationWindow.steps);
         add(stepsN);
-
     }
     public void changeText() {
         genNr.setText("gen="+SymulationWindow.currentStep);

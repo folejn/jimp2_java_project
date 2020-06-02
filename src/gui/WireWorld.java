@@ -5,12 +5,11 @@ import java.awt.*;
 import java.io.File;
 
 public class WireWorld {
-    File in;
     static Gener gen;
     public static String[]outf = null;
     public static void main(String[] args) {
         gen = null;
-        File in = new File(args.length > 0 ? args[0] : "resources/inStruct.txt");
+        File in = new File(args.length > 0 ? args[0] : "resources/in.txt");
         int steps;
         try {
             steps = args.length > 1 ? Integer.parseInt(args[1]) : 20;
@@ -21,7 +20,6 @@ public class WireWorld {
         if(args.length > 3) {
             outf = new String[args.length-3];
             System.arraycopy(args,3,outf,0,outf.length);
-            System.out.println(outf[0]);
         }
         if(out == null) {
             System.err.println(new NullPointerException());

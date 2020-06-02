@@ -14,11 +14,16 @@ public class SymPanel extends JPanel {
         setPreferredSize(new Dimension(WINDOW_WIDTH-INTER_PANEL_WIDTH, WINDOW_HEIGHT));
         setBackground(Color.BLACK);
         setVisible(true);
-
     }
     public void paint(Graphics g) {
         Gener gen =SymulationWindow.gen;
-        drawGener(gen,g);
+        try {
+            drawGener(gen, g);
+        }catch(Exception e) {
+            System.err.println("Incorect value provided for input");
+            System.err.println("Search in the input file for invalid values");
+            System.exit(1);
+        }
     }
 
     @Override
@@ -31,7 +36,7 @@ public class SymPanel extends JPanel {
         p.y = CELL_HEIGHT*y;
     }
 
-    private void drawCell(int type, Point p, Graphics g) {
+    private void drawCell(int type, Point p, Graphics g) throws IllegalStateException{
         Color c;
         switch(type) {
             case EMPTY: c = Color.BLACK; break;
@@ -44,7 +49,7 @@ public class SymPanel extends JPanel {
         g.setColor(c);
         g.fillRect(v.x+p.x,v.y+p.y,CELL_WIDTH,CELL_HEIGHT);
     }
-    public void drawGener(Gener gen,Graphics g) {
+    public void drawGener(Gener gen,Graphics g) throws IllegalStateException{
         Point p= new Point(0,0);
         int r=gen.getRows(), c=gen.getCols();
         for(int i=0; i<r; i++) {

@@ -17,7 +17,7 @@ public class SymulationWindow extends JFrame {
     static int sleepTime;
     static File outFile;
     public SymulationWindow(Gener gen,int steps, File outFile) {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT+10);
         setResizable(false);
         setVisible(true);
 
@@ -25,7 +25,7 @@ public class SymulationWindow extends JFrame {
         this.gen = gen;
         this.steps = steps;
         this.currentStep=0;
-        this.sleepTime = 160;
+        this.sleepTime = 70;
         this.outFile = outFile;
         p= new Properties(gen.getRows(),gen.getCols());
         paintComponent();
