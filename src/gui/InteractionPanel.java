@@ -62,7 +62,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         stepsN.setBounds(0,245,INTER_PANEL_WIDTH-30,30);
         stepsN.setEditable(false);
         stepsN.setSize(INTER_PANEL_WIDTH,20);
-        stepsN.setText("which gener:"+SymulationWindow.steps);
+        stepsN.setText("how many gener:"+SymulationWindow.steps);
         add(stepsN);
 
     }
@@ -96,7 +96,7 @@ public class InteractionPanel extends JPanel implements ActionListener, Adjustme
         if(source == steps) {
             SymulationWindow.steps = steps.getValue();
             SymulationWindow.currentStep=0;
-            stepsN.setText("ile gener:"+SymulationWindow.steps);
+            stepsN.setText("how many gener:"+SymulationWindow.steps);
         }
     }
 
